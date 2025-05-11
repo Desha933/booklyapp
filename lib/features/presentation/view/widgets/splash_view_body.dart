@@ -9,12 +9,20 @@ class SplashViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgPicture.asset(
           AssetsImage.logo,
           color: Colors.white,
           width: MediaQuery.sizeOf(context).width,
+        ),
+        Text(
+          'Bookly...',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: AssetsFont.pacificofont,
+            fontSize: 30,
+          ),
         ),
       ],
     );
