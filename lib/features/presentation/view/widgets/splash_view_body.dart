@@ -1,9 +1,42 @@
 import 'package:booklyapp/core/ulits/assets.dart';
+import 'package:booklyapp/features/presentation/view/widgets/text_sliding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SplashViewBody extends StatelessWidget {
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
+
+  @override
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
+
+class _SplashViewBodyState extends State<SplashViewBody>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<Offset> slidinganimation;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    slidinganimation = Tween<Offset>(
+      begin: Offset(0, 10),
+      end: Offset(0, 0),
+    ).animate(animationController);
+    animationController.forward();
+    slidinganimation.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    animationController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +46,14 @@ class SplashViewBody extends StatelessWidget {
       children: [
         SvgPicture.asset(
           AssetsImage.logo,
-          color: Colors.white,
+          color: Colors.blue,
           width: MediaQuery.sizeOf(context).width,
         ),
-        Text(
-          'Bookly...',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: AssetsFont.pacificofont,
-            fontSize: 30,
-          ),
+        AnimatedBuilder(
+          animation: slidinganimation,
+          builder:
+              (context, child) =>
+                  CustomTextSliding(slidinganimation: slidinganimation),
         ),
       ],
     );
