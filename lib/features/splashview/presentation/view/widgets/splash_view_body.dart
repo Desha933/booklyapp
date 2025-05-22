@@ -22,6 +22,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void initState() {
     super.initState();
     initanimationcontroller();
+
     navigatetohomeview();
   }
 
@@ -68,7 +69,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void navigatetohomeview() {
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(Duration(seconds: KDuration), () {
       Get.to(
         () => HomeView(),
         transition: Transition.fade,
